@@ -104,6 +104,11 @@ public class myDS
     public void Delete(int key)
     {
         int hash = key % capacity;
+        //Avoiding hash collision.
+        while (eleArr[hash].GetKey() != key)
+        {
+            hash = (hash + 1) % capacity;
+        }
         //Remove the list node in O(1) time
         ListNode DeletedNode = eleArr[hash].listNode;
         DeletedNode.prev.next = DeletedNode.next;
